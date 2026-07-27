@@ -10,4 +10,4 @@ f0_vals    = [2e4, 4e4, 6e4, 1e5];
 sizex = 0.20;
 dx    = (1e-3)/2;
 f0    = 1e5;
-simulate_plane(sizex, dx, f0);
+simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0);

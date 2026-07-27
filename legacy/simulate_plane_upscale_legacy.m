@@ -188,4 +188,3 @@ fprintf('Simulation time: %.2f s, Rendering time: %.2f s\n', ...
 
 end
 
-

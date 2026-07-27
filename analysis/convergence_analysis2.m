@@ -26,7 +26,7 @@ end
 % Warm-up (single-threaded) to reduce first-call overhead
 fprintf('Warm-up run (no render)...\n');
 try
-    simulate_plane(default_sizex, default_dx, default_f0, false);
+    simulate_plane('sizex', default_sizex, 'dx', default_dx, 'f0', default_f0, 'render', false);
 catch ME
     warning('Warm-up simulate failed');
 end
@@ -102,7 +102,7 @@ if use_parallel
                 dx = default_dx;
             end
             % run simulation on worker (no rendering)
-            t_sim_local = simulate_plane(sizex, dx, f0, worker_render_flag);
+            t_sim_local = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', worker_render_flag);
             t_all(kk) = t_sim_local;
             err_all{kk} = '';
 
@@ -168,7 +168,7 @@ else
             fprintf('Running f0 sweep %d/%d: f0=%.3g Hz\n', kk - n_dx - n_sz, total_tasks, f0);
         end
         try
-            t_sim_local = simulate_plane(sizex, dx, f0, render_video);
+            t_sim_local = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', render_video);
             t_all(kk) = t_sim_local;
             err_all{kk} = '';
         catch ME

@@ -27,7 +27,7 @@ end
 % Warm-up (single-threaded) to reduce first-call overhead
 fprintf('Warm-up run (no render)...\n');
 try
-    simulate_plane(default_sizex, default_dx, default_f0, false);
+    simulate_plane('sizex', default_sizex, 'dx', default_dx, 'f0', default_f0, 'render', false);
 catch ME
     warning('Warm-up simulate failed:');
 end
@@ -70,7 +70,7 @@ if use_parallel
         % run simulation on worker
         try
             % ensure we do not render inside workers
-            t_sim = simulate_plane(sizex, dx, f0, false);
+            t_sim = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', false);
             dx_t(k) = t_sim;
             dx_err{k} = '';
         catch ME
@@ -92,7 +92,7 @@ else
         f0 = default_f0;
         fprintf('Running dx sweep %d/%d: dx=%.4g m\n', k, n_dx, dx);
         try
-            t_sim = simulate_plane(sizex, dx, f0, render_video);
+            t_sim = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', render_video);
             dx_t(k) = t_sim;
             dx_err{k} = '';
         catch ME
@@ -128,7 +128,7 @@ if use_parallel
         dx = default_dx;
         f0 = default_f0;
         try
-            t_sim = simulate_plane(sizex, dx, f0, false);
+            t_sim = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', false);
             sz_t(k) = t_sim;
             sz_err{k} = '';
         catch ME
@@ -150,7 +150,7 @@ else
         f0 = default_f0;
         fprintf('Running size sweep %d/%d: sizex=%.3f m\n', k, n_sz, sizex);
         try
-            t_sim = simulate_plane(sizex, dx, f0, render_video);
+            t_sim = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', render_video);
             sz_t(k) = t_sim;
             sz_err{k} = '';
         catch ME
@@ -186,7 +186,7 @@ if use_parallel
         sizex = default_sizex;
         dx = default_dx;
         try
-            t_sim = simulate_plane(sizex, dx, f0, false);
+            t_sim = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', false);
             f_t(k) = t_sim;
             f_err{k} = '';
         catch ME
@@ -208,7 +208,7 @@ else
         dx = default_dx;
         fprintf('Running f0 sweep %d/%d: f0=%.3g Hz\n', k, n_f, f0);
         try
-            t_sim = simulate_plane(sizex, dx, f0, render_video);
+            t_sim = simulate_plane('sizex', sizex, 'dx', dx, 'f0', f0, 'render', render_video);
             f_t(k) = t_sim;
             f_err{k} = '';
         catch ME
